@@ -5,48 +5,53 @@ from tkinter import filedialog
 import tkfontchooser as fontdialog
 import codecs, os
 
-print("Team PyDEV Never DIE !!!")
+print("[ **** ] Starting PyDev++ ...")
+print("[  OK  ] Started PyDev++")
 
 filepath = ''
 file = ''
 
 # Hàm Hệ Thống
-def newFile():
-    global file
-    mainText.delete()
-    mainMenu['text'] = "Untitled"
+def newfile():
+    mainMenu['text'] = 'Untitled'
+    mainText.delete("1.0", END)
+    gui.title("Untitled - PyDev++")
 
-def openFile():
-    global filepath
-    file = filedialog.askopenfilename(parent = gui, title = 'Select File To Open',
-                                      filetypes = [('Python Files', '*.py;*pyw')],
-                                      defaultextension = [('Python Files', '*.py;*pyw')])
-    filepath = file
-    if file is not None:
-        fopen = codecs.open(file, 'r', encoding = 'UTF-8')
-        content = fopen.read()
-        mainText.insert('1.0', content)
-        fopen.close()
-        gui.title(str(filepath) + ' - PyDev++')
-        mainMenu['text'] = file
-
-
-def saveFile():
+def openfile():
     global filepath, file
-    if filepath == '':
-        file = filedialog.asksaveasfilename(parent = gui, title = 'Save', filetypes = [('Python Files', '*.py;*pyw')],
-                                            defaultextension = [('Python Files', '*.py;*pyw')])
-        fopen = codecs.open(file, 'w', encoding = 'UTF-8')
-        saveText = str(mainText.get(1.0, END))
-        fopen.write(saveText)
-        fopen.close()
-        return file
+    try:
+        file = filedialog.askopenfilename(parent=gui, title='Select File to Open', filetypes={('Python Source Code', '*.py;*.pyw')}, defaultextension={('Python Source Code', '*.py;*.pyw')})
+        if file == filepath:
+            return None
+        else:
+            filepath = file
+            mainMenu['text'] = filepath
+            content = codecs.open(file, 'r', encoding='UTF-8')
+            mainText.insert("1.0", content.read())
+            content.close()
+            gui.title(filepath + " - PyDev++")
+    except FileNotFoundError:
+        mainMenu['text'] = 'Untitled'
 
-    elif filepath != '':
-        fopen = codecs.open(filepath, 'w', encoding = 'UTF-8')
-        saveText = str(mainText.get(1.0, END))
-        fopen.write(saveText)
-        fopen.close()
+def savefile():
+    global filepath, file
+    if file != '' and filepath != '':
+        content = codecs.open(file, 'r+', encoding='UTF-8')
+        saveText = mainText.get("1.0", END)
+        content.write(saveText)
+        content.close()
+    else:
+        try:
+            file = filedialog.asksaveasfilename(parent=gui, title='Save As', filetypes={('Python Source Code', '*.py;*.pyw')}, defaultextension={('Python Source Code', '*.py;*.pyw')})
+            filepath = file
+            content = codecs.open(file, 'r+', encoding='UTF-8')
+            saveText = mainText.get("1.0", END)
+            content.write(saveText)
+            content.close()
+            gui.title(filepath + " - PyDev++")
+            mainMenu['text'] = filepath
+        except FileNotFoundError:
+            mainMenu['text'] = "Untitled"
 
 def selectFont():
     font = fontdialog.askfont(master = gui, text = 'ABCD', title = 'Select Font')
@@ -75,19 +80,21 @@ def cut():
 def selall():
     mainText.tag_add('sel', '1.0', 'end')
 
-def RunScript():
+def runscript(args=None):
     global file, filepath
-    if file != '':
+    if file != None and filepath != None:
         os.system("cls")
-        os.system(file)
+        os.system("python " + filepath + " & pause")
     else:
-        file = saveFile()
-        os.system("cls")
-        os.system("python -u " + filepath)
-
+        try:
+            savefile()
+            os.system("cls")
+            os.system("python " + filepath + " & pause")
+        except FileNotFoundError:
+            return None
 # Hàm tạo form
 gui = Tk()
-gui.title("PyDev++")
+gui.title("Untitled - PyDev++")
 style = Style(gui)
 style.theme_use('winnative')
 
@@ -97,12 +104,16 @@ frame.pack(fill = BOTH, expand = 1)
 frameMenu = LabelFrame(frame, text = "Quick Menu", width = 120, height = 60)
 frameMenu.pack(fill = BOTH, expand = 2, padx = 7, pady = 7)
 
-mainMenu = LabelFrame(frame, text = file, width = 122, height = 60, bd = 1)
+mainMenu = LabelFrame(frame, text = "Untitled", width = 122, height = 60, bd = 1)
 mainMenu.pack(fill = BOTH, expand = 2, padx = 7, pady = 7)
 
-buttonRunScript = Button(frameMenu, text = "Run Script", command = RunScript)
+buttonRunScript = Button(frameMenu, text = "Run Script", command=runscript)
 buttonRunScript.config(width=8, height=1)
 buttonRunScript.pack(side=LEFT, padx = 7, pady = 7)
+
+buttonOpenTerm = Button(frameMenu, text='Terminal', command=lambda: os.system('start'))
+buttonOpenTerm.config(width=8, height=1)
+buttonOpenTerm.pack(side=LEFT, padx=7, pady=7)
 
 mainText = ScrolledText.ScrolledText(mainMenu, width = 120, height = 30)
 mainText.config(font = ('Consolas', '16'))
@@ -114,9 +125,9 @@ gui.config(menu = menu)
 
 fileMenu = Menu(menu)
 menu.add_cascade(label = 'File', menu = fileMenu, underline = 0)
-fileMenu.add_command(label = 'New', command=lambda: newFile(), accelerator = 'Ctrl+N')
-fileMenu.add_command(label = 'Open', command = lambda: openFile(), accelerator = 'Ctrl+O')
-fileMenu.add_command(label = 'Save', command = lambda: saveFile(), accelerator = 'Ctrl+S')
+fileMenu.add_command(label = 'New', accelerator = 'Ctrl+N', command=newfile)
+fileMenu.add_command(label = 'Open', accelerator = 'Ctrl+O', command=openfile)
+fileMenu.add_command(label = 'Save', accelerator = 'Ctrl+S', command=savefile)
 fileMenu.add_separator()
 fileMenu.add_command(label = 'Exit', command = gui.destroy, accelerator = 'Ctrl+Q')
 
@@ -145,12 +156,6 @@ helpMenu = Menu(menu)
 menu.add_cascade(label = 'Help', menu = helpMenu)
 helpMenu.add_command(label = 'About')
 
-gui.bind("<Control-n>", newFile)
-gui.bind("<Control-o>", openFile)
-gui.bind("<Control-s>", saveFile)
-gui.bind("<Alt-c>", copy)
-gui.bind("<Alt-v>", paste)
-gui.bind("<Control-x>", cut)
-gui.bind("<Control-a>", selall)
+gui.bind('<F5>', runscript)
 
 gui.mainloop()

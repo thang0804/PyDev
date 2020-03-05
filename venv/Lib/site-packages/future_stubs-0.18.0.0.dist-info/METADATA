@@ -1,0 +1,30 @@
+Metadata-Version: 2.0
+Name: future-stubs
+Version: 0.18.0.0
+Summary: PEP 561 stubs for python-future
+Home-page: https://python-future.org
+Author: Chad Dombrova
+Author-email: chadrik@gmail.com
+License: MIT
+Keywords: future past python3 migration futurize backport six 2to3 modernize pasteurize 3to2 stubs mypy
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.6
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: License :: OSI Approved
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Requires-Python: >=2.6, !=3.0.*, !=3.1.*, !=3.2.*
+Requires-Dist: python-future (>=0.16.0)
+
+UNKNOWN
+
+
