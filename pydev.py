@@ -15,12 +15,12 @@ filepath = ''
 file = ''
 
 # Hàm Hệ Thống
-def newfile():
+def newfile(args=None):
     mainMenu['text'] = 'Untitled'
     mainText.delete("1.0", END)
     gui.title("Untitled - PyDev++")
 
-def openfile():
+def openfile(args=None):
     global filepath, file
     try:
         file = filedialog.askopenfilename(parent=gui, title='Select File to Open', filetypes={('Python Source Code', '*.py;*.pyw')}, defaultextension={('Python Source Code', '*.py;*.pyw')})
@@ -36,7 +36,7 @@ def openfile():
     except FileNotFoundError:
         mainMenu['text'] = 'Untitled'
 
-def savefile():
+def savefile(args=None):
     global filepath, file
     if file != '' and filepath != '':
         content = codecs.open(file, 'r+', encoding='UTF-8')
@@ -107,6 +107,7 @@ def runscript(args=None):
             return None
 
 def openterm(args=None):
+    global file, filepath
     if file != '' and filepath != '':
         cwd = filepath.replace(Path(filepath).name, '')
         os.chdir(cwd)
@@ -186,5 +187,8 @@ helpMenu.add_command(label = 'About')
 gui.bind('<F5>', runscript)
 gui.bind('<Control-Shift-P>', lambda master=None: openpip.createPip(gui))
 gui.bind('<Control-Alt-t>', openterm)
+gui.bind('<Control-o>', openfile)
+gui.bind('<Control-s>', savefile)
+gui.bind('<Control-n>', newfile)
 
 gui.mainloop()
