@@ -84,8 +84,8 @@ def selall():
     mainText.tag_add('sel', '1.0', 'end')
 
 def runscript(args=None):
-    global file, filepath
-    if file != None and filepath != None:
+    global file, filepath, mainMenu
+    if mainMenu['text'] != 'Untitled':
         os.system("cls")
         start = timer()
         os.system("python " + filepath)
@@ -93,16 +93,19 @@ def runscript(args=None):
         print()
         print("[Run finished in " + str(end - start) + "]")
         os.system("pause")
-    else:
+    elif mainMenu['text'] == 'Untitled':
         try:
             savefile()
-            os.system("cls")
-            start = timer()
-            os.system("python " + filepath)
-            end = timer()
-            print()
-            print("[Run finished in " + str(end - start) + "]")
-            os.system("pause")
+            if filepath == '' or filepath == None:
+                return None
+            elif filepath != '' or filepath != None:
+                os.system("cls")
+                start = timer()
+                os.system("python " + filepath)
+                end = timer()
+                print()
+                print("[Run finished in " + str(end - start) + "]")
+                os.system("pause")
         except FileNotFoundError:
             return None
 
