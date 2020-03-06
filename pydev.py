@@ -3,9 +3,11 @@ from tkinter.ttk import Style
 import tkinter.scrolledtext as ScrolledText
 from tkinter import filedialog
 import tkfontchooser as fontdialog
+from lib import openpip
 import codecs, os
+from timeit import default_timer as timer
 
-print("[ **** ] Starting PyDev++ ...")
+print("[ ==== ] Starting PyDev++ ...")
 print("[  OK  ] Started PyDev++")
 
 filepath = ''
@@ -84,14 +86,25 @@ def runscript(args=None):
     global file, filepath
     if file != None and filepath != None:
         os.system("cls")
-        os.system("python " + filepath + " & pause")
+        start = timer()
+        os.system("python " + filepath)
+        end = timer()
+        print()
+        print("[Run finished in " + str(end - start) + "]")
+        os.system("pause")
     else:
         try:
             savefile()
             os.system("cls")
-            os.system("python " + filepath + " & pause")
+            start = timer()
+            os.system("python " + filepath)
+            end = timer()
+            print()
+            print("[Run finished in " + str(end - start) + "]")
+            os.system("pause")
         except FileNotFoundError:
             return None
+
 # Hàm tạo form
 gui = Tk()
 gui.title("Untitled - PyDev++")
@@ -131,7 +144,7 @@ fileMenu.add_command(label = 'Save', accelerator = 'Ctrl+S', command=savefile)
 fileMenu.add_separator()
 fileMenu.add_command(label = 'Exit', command = gui.destroy, accelerator = 'Ctrl+Q')
 
-editMenu = Menu(frame)
+editMenu = Menu(menu)
 menu.add_cascade(label = 'Edit', menu = editMenu, underline = 0)
 editMenu.add_command(label = 'Undo', accelerator = 'Ctrl+Z')
 editMenu.add_command(label = 'Redo', accelerator = 'Ctrl+Y')
@@ -143,6 +156,10 @@ editMenu.add_command(label = 'Select All', accelerator = 'Ctrl+A')
 editMenu.add_separator()
 editMenu.add_command(label = 'Word Wrap')
 editMenu.add_command(label = 'Font...', command = lambda: selectFont())
+
+toolMenu = Menu(menu)
+menu.add_cascade(label='Tools', menu=toolMenu)
+toolMenu.add_command(label='Pip Install Package', command=lambda: openpip.createPip(gui), accelerator = 'Ctrl+Shift+P')
 
 QuestionsMenu = Menu(menu)
 menu.add_cascade(label = 'Questions', menu = QuestionsMenu)
@@ -157,5 +174,6 @@ menu.add_cascade(label = 'Help', menu = helpMenu)
 helpMenu.add_command(label = 'About')
 
 gui.bind('<F5>', runscript)
+gui.bind('<Control-Shift-p>', lambda master=gui: openpip.createPip(gui))
 
 gui.mainloop()
