@@ -6,6 +6,7 @@ import tkfontchooser as fontdialog
 from lib import openpip
 import codecs, os
 from timeit import default_timer as timer
+from pathlib import Path
 
 print("[ ==== ] Starting PyDev++ ...")
 print("[  OK  ] Started PyDev++")
@@ -105,6 +106,14 @@ def runscript(args=None):
         except FileNotFoundError:
             return None
 
+def openterm(args=None):
+    if file != '' and filepath != '':
+        cwd = filepath.replace(Path(filepath).name, '')
+        os.chdir(cwd)
+        os.system('start')
+    else:
+        os.chdir('C:\\')
+        os.system('start')
 # Hàm tạo form
 gui = Tk()
 gui.title("Untitled - PyDev++")
@@ -124,7 +133,7 @@ buttonRunScript = Button(frameMenu, text = "Run Script", command=runscript)
 buttonRunScript.config(width=8, height=1)
 buttonRunScript.pack(side=LEFT, padx = 7, pady = 7)
 
-buttonOpenTerm = Button(frameMenu, text='Terminal', command=lambda: os.system('start'))
+buttonOpenTerm = Button(frameMenu, text='Terminal', command=openterm)
 buttonOpenTerm.config(width=8, height=1)
 buttonOpenTerm.pack(side=LEFT, padx=7, pady=7)
 
@@ -160,6 +169,7 @@ editMenu.add_command(label = 'Font...', command = lambda: selectFont())
 toolMenu = Menu(menu)
 menu.add_cascade(label='Tools', menu=toolMenu)
 toolMenu.add_command(label='Pip Install Package', command=lambda: openpip.createPip(gui), accelerator = 'Ctrl+Shift+P')
+toolMenu.add_command(label='Open Terminal', command=openterm, accelerator = 'Ctrl+Alt+T')
 
 QuestionsMenu = Menu(menu)
 menu.add_cascade(label = 'Questions', menu = QuestionsMenu)
@@ -174,6 +184,7 @@ menu.add_cascade(label = 'Help', menu = helpMenu)
 helpMenu.add_command(label = 'About')
 
 gui.bind('<F5>', runscript)
-gui.bind('<Control-Shift-p>', lambda master=gui: openpip.createPip(gui))
+gui.bind('<Control-Shift-P>', lambda master=None: openpip.createPip(gui))
+gui.bind('<Control-Alt-t>', openterm)
 
 gui.mainloop()

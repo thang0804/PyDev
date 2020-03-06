@@ -1,3 +1,4 @@
 # PyDev++ Project
 + Fix Build and RunScript
-+ Add press F5 to run script
++ Added Open Terminal, Install Package with Pip
++ Added Terminal open in working directory
