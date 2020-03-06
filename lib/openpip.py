@@ -1,10 +1,11 @@
 from tkinter import *
+import tkinter.messagebox as msgbox
 import os
 
 def doInstall(entry, master):
     os.system("cls")
     package = entry.get()
-    os.system("pip install " + package)
+    os.system("pip install " + package + ' & pause')
     master.destroy()
 
 def createPip(master):

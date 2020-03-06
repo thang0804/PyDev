@@ -39,7 +39,7 @@ def openfile(args=None):
 def savefile(args=None):
     global filepath, file
     if file != '' and filepath != '':
-        content = codecs.open(file, 'r+', encoding='UTF-8')
+        content = codecs.open(file, 'w', encoding='UTF-8')
         saveText = mainText.get("1.0", END)
         content.write(saveText)
         content.close()
@@ -47,7 +47,7 @@ def savefile(args=None):
         try:
             file = filedialog.asksaveasfilename(parent=gui, title='Save As', filetypes={('Python Source Code', '*.py;*.pyw')}, defaultextension={('Python Source Code', '*.py;*.pyw')})
             filepath = file
-            content = codecs.open(file, 'r+', encoding='UTF-8')
+            content = codecs.open(file, 'w', encoding='UTF-8')
             saveText = mainText.get("1.0", END)
             content.write(saveText)
             content.close()
