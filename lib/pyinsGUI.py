@@ -29,7 +29,7 @@ def cmdprocess(master, srcPathEntry):
     global cwd, filepath
     os.chdir(cwd)
     os.system('cls')
-    os.system('pyinstaller ' + Path(filepath).name + ' & pause')
+    os.system("pyinstaller " + Path(filepath).name + " & pause")
     master.destroy()
 
 def createGUI(master=None):
@@ -63,3 +63,18 @@ def createGUI(master=None):
     btnCancel.place(x=610, y=65)
     btnOK = Button(exewin, text='OK', height=1, width=10, command=lambda : cmdprocess(master, scriptEntry))
     btnOK.place(x=527, y=65)
+
+def quickBuild(master, filepath):
+    if filepath == '':
+        file = filedialog.askopenfilename(parent=master, title='Choose Script to Build Exe',
+                                          filetypes={('Python Source Code', '*.py;*.pyw')},
+                                          defaultextension={('Python Source Code', '*.py;*.pyw')})
+        cwd = file.replace(Path(file).name, '')
+        os.chdir(cwd)
+        os.system('cls')
+        os.system('pyinstaller {0} & pause'.format(Path(file).name))
+    else:
+        cwd = filepath.replace(Path(filepath).name, '')
+        os.chdir(cwd)
+        os.system('cls')
+        os.system('pyinstaller {0} & pause'.format(Path(filepath).name))

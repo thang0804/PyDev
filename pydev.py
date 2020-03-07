@@ -14,6 +14,7 @@ print("[  OK  ] Started PyDev++")
 
 filepath = ''
 file = ''
+cwd = ''
 
 # Hàm Hệ Thống
 def newfile(args=None):
@@ -115,7 +116,7 @@ def runscript(args=None):
             return None
 
 def openterm(args=None):
-    global file, filepath
+    global file, filepath, cwd
     if file != '' and filepath != '':
         cwd = filepath.replace(Path(filepath).name, '')
         os.chdir(cwd)
@@ -142,9 +143,13 @@ buttonRunScript = Button(frameMenu, text = "Run Script", command=runscript)
 buttonRunScript.config(width=8, height=1)
 buttonRunScript.pack(side=LEFT, padx = 7, pady = 7)
 
-buttonOpenTerm = Button(frameMenu, text='Terminal', command=openterm)
-buttonOpenTerm.config(width=8, height=1)
+buttonOpenTerm = Button(frameMenu, text='Open Terminal', command=openterm)
+buttonOpenTerm.config(width=13, height=1)
 buttonOpenTerm.pack(side=LEFT, padx=7, pady=7)
+
+buttonPyToExe = Button(frameMenu, text='Build Python to Exe', command=lambda: pyinsGUI.quickBuild(gui, file))
+buttonPyToExe.config(width=15, height=1)
+buttonPyToExe.pack(side=LEFT, padx=7, pady=7)
 
 mainText = ScrolledText.ScrolledText(mainMenu, width = 120, height = 30)
 mainText.config(font = ('Consolas', '16'))
