@@ -4,6 +4,7 @@ import tkinter.scrolledtext as ScrolledText
 from tkinter import filedialog
 import tkfontchooser as fontdialog
 from lib import openpip
+from lib import pyinsGUI
 import codecs, os
 from timeit import default_timer as timer
 from pathlib import Path
@@ -33,6 +34,8 @@ def openfile(args=None):
             mainText.insert("1.0", content.read())
             content.close()
             gui.title(filepath + " - PyDev++")
+            cwd = filepath.replace(Path(filepath).name, '')
+            os.chdir(cwd)
     except FileNotFoundError:
         mainMenu['text'] = 'Untitled'
 
@@ -53,6 +56,8 @@ def savefile(args=None):
             content.close()
             gui.title(filepath + " - PyDev++")
             mainMenu['text'] = filepath
+            cwd = filepath.replace(Path(filepath).name, '')
+            os.chdir(cwd)
         except FileNotFoundError:
             mainMenu['text'] = "Untitled"
 
@@ -174,6 +179,8 @@ toolMenu = Menu(menu)
 menu.add_cascade(label='Tools', menu=toolMenu)
 toolMenu.add_command(label='Pip Install Package', command=lambda: openpip.createPip(gui), accelerator = 'Ctrl+Shift+P')
 toolMenu.add_command(label='Open Terminal', command=openterm, accelerator = 'Ctrl+Alt+T')
+toolMenu.add_separator()
+toolMenu.add_command(label='PyInstaller GUI', accelerator='Ctrl+Alt+P', command=lambda: pyinsGUI.createGUI(gui))
 
 QuestionsMenu = Menu(menu)
 menu.add_cascade(label = 'Questions', menu = QuestionsMenu)
@@ -190,6 +197,7 @@ helpMenu.add_command(label = 'About')
 gui.bind('<F5>', runscript)
 gui.bind('<Control-Shift-P>', lambda master=None: openpip.createPip(gui))
 gui.bind('<Control-Alt-t>', openterm)
+gui.bind('<Control-Alt-p>', lambda master=None: pyinsGUI.createGUI(gui))
 gui.bind('<Control-o>', openfile)
 gui.bind('<Control-s>', savefile)
 gui.bind('<Control-n>', newfile)

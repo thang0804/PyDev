@@ -2,11 +2,15 @@ from tkinter import *
 import tkinter.messagebox as msgbox
 import os
 
-def doInstall(entry, master):
-    os.system("cls")
-    package = entry.get()
-    os.system("pip install " + package + ' & pause')
-    master.destroy()
+def doInstall(entry, master, packageCall=None):
+    if packageCall == None:
+        os.system("cls")
+        package = entry.get()
+        os.system("pip install " + package + " & pause")
+        master.destroy()
+    elif packageCall != None:
+        os.system("cls")
+        os.system("pip install " + packageCall + " & pause")
 
 def createPip(master):
     pwin = Toplevel(master)
