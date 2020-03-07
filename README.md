@@ -1,5 +1,3 @@
 # PyDev++ Project
-+ Fixed Build and RunScript
-+ Added Open Terminal, Install Package with Pip
-+ Added Terminal open in working directory
-+ Fixed Save File Bug
++ Added Build Exe for script
++ Added Open Terminal in current working directory
