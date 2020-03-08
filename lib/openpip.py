@@ -6,8 +6,12 @@ def doInstall(entry, master, packageCall=None):
     if packageCall == None:
         os.system("cls")
         package = entry.get()
-        os.system("pip install " + package + " & pause")
-        master.destroy()
+        if package == '':
+            msgbox.showerror('Error !', 'Package to install entry cannot be empty !')
+            return None
+        else:
+            os.system("pip install " + package + " & pause")
+            master.destroy()
     elif packageCall != None:
         os.system("cls")
         os.system("pip install " + packageCall + " & pause")

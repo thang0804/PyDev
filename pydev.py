@@ -153,7 +153,6 @@ buttonPyToExe.pack(side=LEFT, padx=7, pady=7)
 
 mainText = ScrolledText.ScrolledText(mainMenu, width = 120, height = 30)
 mainText.config(font = ('Consolas', '16'))
-mainText.config()
 mainText.pack(fill = BOTH, expand = 2)
 
 menu = Menu(frame)
