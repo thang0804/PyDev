@@ -1,2 +1,2 @@
 # PyDev++ Project
-+ Fix Pip install bugs
++ Fix Pip and PyInstaller install bugs

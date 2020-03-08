@@ -199,6 +199,7 @@ menu.add_cascade(label = 'Help', menu = helpMenu)
 helpMenu.add_command(label = 'About')
 
 gui.bind('<F5>', runscript)
+gui.bind('<F6>', lambda master=None, pathtofile=None: pyinsGUI.quickBuild(gui, file))
 gui.bind('<Control-Shift-P>', lambda master=None: openpip.createPip(gui))
 gui.bind('<Control-Alt-t>', openterm)
 gui.bind('<Control-Alt-p>', lambda master=None: pyinsGUI.createGUI(gui))
