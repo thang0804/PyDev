@@ -1,13 +1,17 @@
-from tkinter import *
-from tkinter.ttk import Style
+import codecs
+import os
 import tkinter.scrolledtext as ScrolledText
+from pathlib import Path
+from timeit import default_timer as timer
+from tkinter import *
 from tkinter import filedialog
+from tkinter.ttk import Style
+from threaded import *
+
 import tkfontchooser as fontdialog
+
 from lib import openpip
 from lib import pyinsGUI
-import codecs, os
-from timeit import default_timer as timer
-from pathlib import Path
 
 print("[ ==== ] Starting PyDev++ ...")
 print("[  OK  ] Started PyDev++")
@@ -73,18 +77,15 @@ def copy():
     copytext = mainText.get("sel.first", "sel.last")
     mainText.clipboard_append(copytext)
 
-
 def paste():
     pastetext = mainText.selection_get(selection = 'CLIPBOARD')
     mainText.insert("insert", pastetext)
-
 
 def cut():
     mainText.clipboard_clear()
     copytext = mainText.get("sel.first", "sel.last")
     mainText.clipboard_append(copytext)
     mainText.delete("sel.first", "sel.last")
-
 
 def selall():
     mainText.tag_add('sel', '1.0', 'end')
@@ -98,7 +99,6 @@ def runscript(args=None):
         end = timer()
         print()
         print("[Run finished in " + str(end - start) + "]")
-        os.system("pause")
     elif mainMenu['text'] == 'Untitled':
         try:
             savefile()
@@ -111,7 +111,6 @@ def runscript(args=None):
                 end = timer()
                 print()
                 print("[Run finished in " + str(end - start) + "]")
-                os.system("pause")
         except FileNotFoundError:
             return None
 
@@ -124,22 +123,36 @@ def openterm(args=None):
     else:
         os.chdir('C:\\')
         os.system('start')
+###
+# Điều khiển đa luồng
+def doRunScript(args=None):
+    run = runscript()
+    run.start()
+    run.join()
+###
+
+
 # Hàm tạo form
 gui = Tk()
 gui.title("Untitled - PyDev++")
+gui.minsize(720, 480)
+
 style = Style(gui)
 style.theme_use('winnative')
 
 frame = Frame(gui)
 frame.pack(fill = BOTH, expand = 1)
 
-frameMenu = LabelFrame(frame, text = "Quick Menu", width = 120, height = 60)
+menu = Menu(frame)
+gui.config(menu = menu)
+
+frameMenu = LabelFrame(frame, text = "[ Quick Menu ]", width = 120, height = 60)
 frameMenu.pack(fill = BOTH, expand = 2, padx = 7, pady = 7)
 
 mainMenu = LabelFrame(frame, text = "Untitled", width = 122, height = 60, bd = 1)
 mainMenu.pack(fill = BOTH, expand = 2, padx = 7, pady = 7)
 
-buttonRunScript = Button(frameMenu, text = "Run Script", command=runscript)
+buttonRunScript = Button(frameMenu, text = "Run Script", command=doRunScript)
 buttonRunScript.config(width=8, height=1)
 buttonRunScript.pack(side=LEFT, padx = 7, pady = 7)
 
@@ -154,9 +167,6 @@ buttonPyToExe.pack(side=LEFT, padx=7, pady=7)
 mainText = ScrolledText.ScrolledText(mainMenu, width = 120, height = 30)
 mainText.config(font = ('Consolas', '16'))
 mainText.pack(fill = BOTH, expand = 2)
-
-menu = Menu(frame)
-gui.config(menu = menu)
 
 fileMenu = Menu(menu)
 menu.add_cascade(label = 'File', menu = fileMenu, underline = 0)
@@ -198,7 +208,7 @@ helpMenu = Menu(menu)
 menu.add_cascade(label = 'Help', menu = helpMenu)
 helpMenu.add_command(label = 'About')
 
-gui.bind('<F5>', runscript)
+gui.bind('<F5>', doRunScript)
 gui.bind('<F6>', lambda master=None, pathtofile=None: pyinsGUI.quickBuild(gui, file))
 gui.bind('<Control-Shift-P>', lambda master=None: openpip.createPip(gui))
 gui.bind('<Control-Alt-t>', openterm)
@@ -208,3 +218,4 @@ gui.bind('<Control-s>', savefile)
 gui.bind('<Control-n>', newfile)
 
 gui.mainloop()
+###

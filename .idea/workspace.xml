@@ -2,6 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="845d7bfb-f846-4e58-bdf9-66a4b017fffa" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/icon/Navigation_FastForward.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/Navigation_Play.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/Navigation_Rewind.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_Add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_Audio.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_Cloud.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_Compose.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_Favorite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_Home.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_Invitation.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_Location.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_Love.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_Search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icon/QuickActions_TaskCompleted.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded-4.0.8.dist-info/INSTALLER" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded-4.0.8.dist-info/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded-4.0.8.dist-info/METADATA" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded-4.0.8.dist-info/RECORD" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded-4.0.8.dist-info/WHEEL" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded-4.0.8.dist-info/top_level.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded/_asynciotask.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded/_base_threaded.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded/_threaded.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded/_threadpooled.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded/_version.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded/class_decorator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/Lib/site-packages/threaded/py.typed" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/pydev/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/Analysis-00.toc" afterDir="false" />
@@ -27,10 +55,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pydev.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="209" column="14" selection-start-line="209" selection-start-column="14" selection-end-line="209" selection-end-column="14" />
+            <state relative-caret-position="215">
+              <caret line="215" column="33" lean-forward="true" selection-start-line="215" selection-start-column="33" selection-end-line="215" selection-end-column="33" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#0#13#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -41,7 +69,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="17">
-                <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+                <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
               </first_editor>
               <second_editor />
             </state>
@@ -77,6 +105,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>textPad</find>
+      <find>self.</find>
+      <find>FrmMain.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -316,11 +346,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/threaded/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="17">
-            <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
+            <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
           </first_editor>
           <second_editor />
         </state>
@@ -328,10 +361,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pydev.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="209" column="14" selection-start-line="209" selection-start-column="14" selection-end-line="209" selection-end-column="14" />
+        <state relative-caret-position="215">
+          <caret line="215" column="33" lean-forward="true" selection-start-line="215" selection-start-column="33" selection-end-line="215" selection-end-column="33" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
