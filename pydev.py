@@ -1,7 +1,7 @@
 import tkinter.scrolledtext as ScrolledText
 from tkinter import *
 from tkinter.ttk import Style
-from threaded import *
+import threading
 
 from lib import openpip
 from lib import pyinsGUI
@@ -17,7 +17,6 @@ file = ''
 cwd = ''
 
 # Hàm tạo form
-@Threaded
 def createMain():
     gui = Tk()
     gui.title("Untitled - PyDev++")
@@ -105,7 +104,6 @@ def createMain():
 
     gui.mainloop()
 
-createDev = createMain()
-createDev.start()
-createDev.join()
+luong1 = threading.Thread(target=createMain, args=())
+luong1.start()
 ###

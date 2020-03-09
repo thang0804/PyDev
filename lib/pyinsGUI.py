@@ -3,6 +3,8 @@ import tkinter.messagebox as msgbox
 import tkinter.filedialog as filedialog
 from pathlib import Path
 import os
+from timeit import default_timer as timer
+import threading
 
 file = ''
 filepath = ''
@@ -32,7 +34,12 @@ def cmdprocess(master, srcPathEntry):
     else:
         os.chdir(cwd)
         os.system('cls')
+        start = timer()
         os.system("pyinstaller " + Path(filepath).name + " & pause")
+        end = timer()
+        print()
+        print("[Build finished in " + str(end - start) + "]")
+        os.system("pause")
         master.destroy()
 
 def createGUI(master=None):
@@ -76,7 +83,12 @@ def quickBuild(master, filepath):
         cwd = file.replace(Path(file).name, '')
         os.chdir(cwd)
         os.system('cls')
-        os.system('pyinstaller {0} & pause'.format(Path(file).name))
+        start = timer()
+        os.system('pyinstaller {0}'.format(Path(file).name))
+        end = timer()
+        print()
+        print("[Build finished in " + str(end - start) + "]")
+        os.system('pause')
     else:
         cwd = filepath.replace(Path(filepath).name, '')
         os.chdir(cwd)

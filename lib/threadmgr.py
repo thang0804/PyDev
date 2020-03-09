@@ -1,13 +1,21 @@
 from tkinter import *
 import tkinter.filedialog as filedialog
-from threaded import *
-from timeit import default_timer as timer
 from pathlib import Path
 import os, codecs
+from timeit import default_timer as timer
+import threading
 
-file, filepath = '', ''
 
-@Threaded
+def openterm(args=None):
+    global file, filepath, cwd
+    if file != '' and filepath != '':
+        cwd = filepath.replace(Path(filepath).name, '')
+        os.chdir(cwd)
+        os.system('start')
+    else:
+        os.chdir('C:\\')
+        os.system('start')
+
 def runscript(master, mainMenu, codeF):
     global filepath, file
     if mainMenu['text'] != 'Untitled':
@@ -22,6 +30,7 @@ def runscript(master, mainMenu, codeF):
         end = timer()
         print()
         print("[Run finished in " + str(end - start) + "]")
+        os.system("pause")
     elif mainMenu['text'] == 'Untitled':
         try:
             file = filedialog.askopenfilename(parent=master, title='Select script to Run',
@@ -39,22 +48,16 @@ def runscript(master, mainMenu, codeF):
                 start = timer()
                 os.system("python " + filepath)
                 end = timer()
+                os.system("pause")
                 print()
                 print("[Run finished in " + str(end - start) + "]")
         except FileNotFoundError:
             return None
 
-def openterm(args=None):
-    global file, filepath, cwd
-    if file != '' and filepath != '':
-        cwd = filepath.replace(Path(filepath).name, '')
-        os.chdir(cwd)
-        os.system('start')
-    else:
-        os.chdir('C:\\')
-        os.system('start')
 
 def doRunScript(master, mainMenu, codeF):
-    run = runscript(master, mainMenu, codeF)
-    run.start()
-    run.join()
+    try:
+        luong2 = threading.Thread(target=runscript, args=(master, mainMenu, codeF))
+        luong2.start()
+    except:
+        return None
