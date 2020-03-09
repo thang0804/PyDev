@@ -7,6 +7,7 @@ import os, codecs
 
 file, filepath = '', ''
 
+@Threaded
 def runscript(master, mainMenu, codeF):
     global filepath, file
     if mainMenu['text'] != 'Untitled':
@@ -53,11 +54,7 @@ def openterm(args=None):
         os.chdir('C:\\')
         os.system('start')
 
-
 def doRunScript(master, mainMenu, codeF):
-    try:
-        run = runscript(master, mainMenu, codeF)
-        run.start()
-        run.join()
-    except AttributeError:
-        return None
+    run = runscript(master, mainMenu, codeF)
+    run.start()
+    run.join()
