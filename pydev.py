@@ -1,6 +1,7 @@
 import tkinter.scrolledtext as ScrolledText
 from tkinter import *
 from tkinter.ttk import Style
+from tkinter.ttk import Notebook
 import threading
 
 from lib import openpip
@@ -20,34 +21,26 @@ cwd = ''
 def createMain():
     gui = Tk()
     gui.title("Untitled - PyDev++")
+    gui.geometry('1200x700')
     gui.minsize(720, 480)
 
     style = Style(gui)
     style.theme_use('winnative')
 
-    frame = Frame(gui)
-    frame.pack(fill = BOTH, expand = 1)
+    thisStyle = Style()
+    noteBook = Notebook(gui)
+    thisStyle.configure('TNotebook.Tab', font=('Consolas', 10))
+
+
+    frame = Frame(noteBook)
+    noteBook.add(frame, text="Main area")
+    noteBook.pack(fill=BOTH, padx=0, pady=0)
 
     menu = Menu(frame)
     gui.config(menu = menu)
 
-    frameMenu = LabelFrame(frame, text = "[ Quick Menu ]", width = 120, height = 60)
-    frameMenu.pack(fill = BOTH, expand = 2, padx = 7, pady = 7)
-
-    mainMenu = LabelFrame(frame, text = "Untitled", width = 122, height = 60, bd = 1)
+    mainMenu = LabelFrame(frame, text='Untitled', width = 122, height = 60, bd = 1)
     mainMenu.pack(fill = BOTH, expand = 2, padx = 7, pady = 7)
-
-    buttonRunScript = Button(frameMenu, text = "Run Script", command=lambda: threadmgr.doRunScript(gui, mainMenu, mainText))
-    buttonRunScript.config(width=8, height=1)
-    buttonRunScript.pack(side=LEFT, padx = 7, pady = 7)
-
-    buttonOpenTerm = Button(frameMenu, text='Open Terminal', command=threadmgr.openterm)
-    buttonOpenTerm.config(width=13, height=1)
-    buttonOpenTerm.pack(side=LEFT, padx=7, pady=7)
-
-    buttonPyToExe = Button(frameMenu, text='Build Python to Exe', command=lambda: pyinsGUI.quickBuild(gui, file))
-    buttonPyToExe.config(width=15, height=1)
-    buttonPyToExe.pack(side=LEFT, padx=7, pady=7)
 
     mainText = ScrolledText.ScrolledText(mainMenu, width = 120, height = 30)
     mainText.config(font = ('Consolas', '16'))
@@ -76,6 +69,9 @@ def createMain():
 
     toolMenu = Menu(menu)
     menu.add_cascade(label='Tools', menu=toolMenu)
+    toolMenu.add_command(label="Run Script", accelerator='Ctrl+B', command=lambda: threadmgr.doRunScript(gui, mainMenu, mainText))
+    toolMenu.add_command(label="Quick build Python to Exe", accelerator='Ctrl+Shift+B')
+    toolMenu.add_separator()
     toolMenu.add_command(label='Pip Install Package', command=lambda: openpip.createPip(gui), accelerator = 'Ctrl+Shift+P')
     toolMenu.add_command(label='Open Terminal', command=threadmgr.openterm, accelerator = 'Ctrl+Alt+T')
     toolMenu.add_separator()
@@ -93,8 +89,8 @@ def createMain():
     menu.add_cascade(label = 'Help', menu = helpMenu)
     helpMenu.add_command(label = 'About')
 
-    gui.bind('<F5>', lambda master=None: threadmgr.doRunScript(gui, mainMenu, mainText))
-    gui.bind('<F6>', lambda master=None, pathtofile=None: pyinsGUI.quickBuild(gui, file))
+    gui.bind('<Control-b>', lambda master=None: threadmgr.doRunScript(gui, mainMenu, mainText))
+    gui.bind('<Control-Shift-B>', lambda master=None, pathtofile=None: pyinsGUI.createThread(gui, mainMenu['text']))
     gui.bind('<Control-Shift-P>', lambda master=None: openpip.createPip(gui))
     gui.bind('<Control-Alt-t>', threadmgr.openterm)
     gui.bind('<Control-Alt-p>', lambda master=None: pyinsGUI.createGUI(gui))

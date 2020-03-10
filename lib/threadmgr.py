@@ -4,7 +4,7 @@ from pathlib import Path
 import os, codecs
 from timeit import default_timer as timer
 import threading
-
+from . import pyinsGUI
 
 def openterm(args=None):
     global file, filepath, cwd

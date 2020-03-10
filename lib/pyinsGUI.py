@@ -4,6 +4,7 @@ import tkinter.filedialog as filedialog
 from pathlib import Path
 import os
 from timeit import default_timer as timer
+from . import threadmgr
 import threading
 
 file = ''
@@ -42,6 +43,13 @@ def cmdprocess(master, srcPathEntry):
         os.system("pause")
         master.destroy()
 
+def startProcess(master, filepath):
+    try:
+        luong3 = threading.Thread(target=cmdprocess, args=(master, filepath))
+        luong3.start()
+    except:
+        return None
+
 def createGUI(master=None):
     exewin = Toplevel(master)
     exewin.title('PyInstaller GUI Tools')
@@ -72,11 +80,11 @@ def createGUI(master=None):
     '''
     btnCancel = Button(exewin, text='Cancel', height=1, width=10, command=exewin.destroy)
     btnCancel.place(x=610, y=65)
-    btnOK = Button(exewin, text='OK', height=1, width=10, command=lambda : cmdprocess(master, scriptEntry))
+    btnOK = Button(exewin, text='OK', height=1, width=10, command=lambda : startProcess(master, filepath))
     btnOK.place(x=527, y=65)
 
 def quickBuild(master, filepath):
-    if filepath == '':
+    if filepath == '' or filepath == 'Untitled':
         file = filedialog.askopenfilename(parent=master, title='Choose Script to Build Exe',
                                           filetypes={('Python Source Code', '*.py;*.pyw')},
                                           defaultextension={('Python Source Code', '*.py;*.pyw')})
@@ -94,3 +102,10 @@ def quickBuild(master, filepath):
         os.chdir(cwd)
         os.system('cls')
         os.system('pyinstaller {0} & pause'.format(Path(filepath).name))
+
+def createThread(master, filepath):
+    try:
+        luong3 = threading.Thread(target=quickBuild, args=(master, filepath))
+        luong3.start()
+    except:
+        return None
