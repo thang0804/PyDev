@@ -11,12 +11,16 @@ file = ''
 filepath = ''
 cwd = ''
 
-def browse(master, srcPathEntry):
+def browse(master, srcPathEntry, command):
     global file, filepath, cwd
     file = filedialog.askopenfilename(parent=master, title='Choose Script to Build Exe', filetypes={('Python Source Code', '*.py;*.pyw')}, defaultextension={('Python Source Code', '*.py;*.pyw')})
     filepath = file
     srcPathEntry.delete(0, END)
     srcPathEntry.insert(0, filepath)
+    command.config(state=NORMAL)
+    command.delete(0, END)
+    command.insert(0, "pyinstaller {0}".format(Path(filepath).name))
+    command.config(state="readonly")
     cwd = filepath.replace(Path(filepath).name, '')
 '''
 def process(master, srcPathEntry, outputText):
@@ -53,17 +57,28 @@ def startProcess(master, filepath):
 def createGUI(master=None):
     exewin = Toplevel(master)
     exewin.title('PyInstaller GUI Tools')
-    exewin.geometry('700x100')
-    exewin.maxsize(width=700, height=100)
+    exewin.geometry('700x300')
+    exewin.maxsize(width=700, height=300)
     exewin.resizable(0,0)
+
+    menuButton = Menubutton(exewin, text='Choose Mode')
+    menuButton.place()
+    menuButton.menu = Menu(menuButton)
+    menuButton["menu"] = menuButton.menu
 
     lb0 = Label(exewin, text='Choose script to build Exe:')
     lb0.config(font=('Segoe UI', '11'))
     lb0.place(x=2, y=1)
-    scriptEntry = Entry(exewin, width=85, text='Src code')
+    scriptEntry = Entry(exewin, width=85)
     scriptEntry.config(font=('Consolas', '10'))
     scriptEntry.place(x=5, y=30)
-    btnBrowse = Button(exewin, text='Browse..', height=1, width=10, command=lambda: browse(exewin, scriptEntry))
+    lb1 = Label(exewin, text='Command:')
+    lb1.config(font=('Segoe UI', '11'))
+    lb1.place(x=2, y=50)
+    commandField = Entry(exewin, width=85, state="readonly")
+    commandField.config(font=('Consolas', '10'))
+    commandField.place(x=5, y=79)
+    btnBrowse = Button(exewin, text='Browse..', height=1, width=10, command=lambda: browse(exewin, scriptEntry, commandField))
     btnBrowse.place(x=610, y=27)
     '''
     lb1 = Label(exewin, text='Output:')
@@ -79,9 +94,9 @@ def createGUI(master=None):
     btnOK.place(x=527, y=460)
     '''
     btnCancel = Button(exewin, text='Cancel', height=1, width=10, command=exewin.destroy)
-    btnCancel.place(x=610, y=65)
+    btnCancel.place(x=610, y=150)
     btnOK = Button(exewin, text='OK', height=1, width=10, command=lambda : startProcess(master, filepath))
-    btnOK.place(x=527, y=65)
+    btnOK.place(x=527, y=150)
 
 def quickBuild(master, filepath):
     if filepath == '' or filepath == 'Untitled':

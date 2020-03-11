@@ -34,7 +34,7 @@ def createMain():
 
     frame = Frame(noteBook)
     noteBook.add(frame, text="Main area")
-    noteBook.pack(fill=BOTH, padx=0, pady=0)
+    noteBook.pack(fill=BOTH, padx=0, pady=0, expand=2)
 
     menu = Menu(frame)
     gui.config(menu = menu)
