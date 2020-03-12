@@ -11,16 +11,16 @@ file = ''
 filepath = ''
 cwd = ''
 
-def browse(master, srcPathEntry, command):
+def browse(master, srcPathEntry, fileField):
     global file, filepath, cwd
     file = filedialog.askopenfilename(parent=master, title='Choose Script to Build Exe', filetypes={('Python Source Code', '*.py;*.pyw')}, defaultextension={('Python Source Code', '*.py;*.pyw')})
     filepath = file
     srcPathEntry.delete(0, END)
     srcPathEntry.insert(0, filepath)
-    command.config(state=NORMAL)
-    command.delete(0, END)
-    command.insert(0, "pyinstaller {0}".format(Path(filepath).name))
-    command.config(state="readonly")
+    fileField.config(state=NORMAL)
+    fileField.delete(0, END)
+    fileField.insert(0, Path(filepath).name)
+    fileField.config(state='readonly')
     cwd = filepath.replace(Path(filepath).name, '')
 '''
 def process(master, srcPathEntry, outputText):
@@ -31,25 +31,28 @@ def process(master, srcPathEntry, outputText):
     outputText.delete(0, END)
     outputText.insert(0, str(output))
 '''
-def cmdprocess(master, srcPathEntry):
+def cmdprocess(master, args):
     global cwd, filepath
-    if filepath == '':
-        msgbox.showerror('Error !', 'Script path entry cannot be empty !')
-        return None
-    else:
-        os.chdir(cwd)
-        os.system('cls')
-        start = timer()
-        os.system("pyinstaller " + Path(filepath).name + " & pause")
-        end = timer()
-        print()
-        print("[Build finished in " + str(end - start) + "]")
-        os.system("pause")
-        master.destroy()
+    if args.get() == '':
+        if filepath == '':
+            msgbox.showerror('Error !', 'Script path entry cannot be empty !')
+            return None
+        else:
+            os.chdir(cwd)
+            os.system('cls')
+            os.system("pyinstaller " + Path(filepath).name)
+    elif args.get() != '':
+        if filepath == '':
+            msgbox.showerror('Error !', 'Script path entry cannot be empty !')
+            return None
+        else:
+            os.chdir(cwd)
+            os.system('cls')
+            os.system('pyinstaller {0} '.format(args.get()) + Path(filepath).name + ' & pause')
 
-def startProcess(master, filepath):
+def startProcess(master, args):
     try:
-        luong3 = threading.Thread(target=cmdprocess, args=(master, filepath))
+        luong3 = threading.Thread(target=cmdprocess, args=(master, args))
         luong3.start()
     except:
         return None
@@ -69,9 +72,11 @@ def createGUI(master=None):
     lb0 = Label(exewin, text='Choose script to build Exe:')
     lb0.config(font=('Segoe UI', '11'))
     lb0.place(x=2, y=1)
+
     scriptEntry = Entry(exewin, width=85)
     scriptEntry.config(font=('Consolas', '10'))
     scriptEntry.place(x=5, y=30)
+
     lb1 = Label(exewin, text='Command:')
     lb1.config(font=('Segoe UI', '11'))
     lb1.place(x=2, y=50)
@@ -86,7 +91,11 @@ def createGUI(master=None):
     argField.config(font=('Consolas', '10'))
     argField.place(x=95, y=79)
 
-    btnBrowse = Button(exewin, text='Browse..', height=1, width=10, command=lambda: browse(exewin, scriptEntry, argField))
+    filenameEntry = Entry(exewin, width=33, state='readonly')
+    filenameEntry.config(font=('Consolas', '10'))
+    filenameEntry.place(x=452, y=79)
+
+    btnBrowse = Button(exewin, text='Browse..', height=1, width=10, command=lambda: browse(exewin, scriptEntry, filenameEntry))
     btnBrowse.place(x=610, y=27)
     '''
     lb1 = Label(exewin, text='Output:')
@@ -103,10 +112,10 @@ def createGUI(master=None):
     '''
     btnCancel = Button(exewin, text='Cancel', height=1, width=10, command=exewin.destroy)
     btnCancel.place(x=610, y=150)
-    btnOK = Button(exewin, text='OK', height=1, width=10, command=lambda : startProcess(master, filepath))
+    btnOK = Button(exewin, text='OK', height=1, width=10, command=lambda : startProcess(exewin, argField))
     btnOK.place(x=527, y=150)
 
-def quickBuild(master, filepath):
+def quickBuild(master, filepath, args):
     if filepath == '' or filepath == 'Untitled':
         file = filedialog.askopenfilename(parent=master, title='Choose Script to Build Exe',
                                           filetypes={('Python Source Code', '*.py;*.pyw')},
@@ -114,17 +123,12 @@ def quickBuild(master, filepath):
         cwd = file.replace(Path(file).name, '')
         os.chdir(cwd)
         os.system('cls')
-        start = timer()
-        os.system('pyinstaller {0}'.format(Path(file).name))
-        end = timer()
-        print()
-        print("[Build finished in " + str(end - start) + "]")
-        os.system('pause')
+        os.system('pyinstaller -F {0}'.format(Path(file).name) + ' & pause')
     else:
         cwd = filepath.replace(Path(filepath).name, '')
         os.chdir(cwd)
         os.system('cls')
-        os.system('pyinstaller {0} & pause'.format(Path(filepath).name))
+        os.system('pyinstaller -F {0}'.format(Path(filepath).name) + ' & pause')
 
 def createThread(master, filepath):
     try:

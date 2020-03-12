@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="80477ba5-c24d-4670-aa6b-33570d21a818" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/Analysis-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/EXE-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/PKG-00.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/PKG-00.pkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/PKG-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/PYZ-00.pyz" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/PYZ-00.pyz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/PYZ-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/PYZ-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/Tree-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/Tree-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/Tree-01.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/Tree-01.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/base_library.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/warn-pydev.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/warn-pydev.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/pydev/xref-pydev.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/pydev/xref-pydev.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/pydev.exe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/pydev.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pyinsGUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pyinsGUI.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pydev.py" beforeDir="false" afterPath="$PROJECT_DIR$/pydev.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pydev.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="287">
-              <caret line="105" column="22" lean-forward="true" selection-start-line="105" selection-start-column="22" selection-end-line="105" selection-end-column="22" />
+              <caret line="105" column="22" selection-start-line="105" selection-start-column="22" selection-end-line="105" selection-end-column="22" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -60,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/pyinsGUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="134" selection-start-line="134" selection-end-line="134" />
+            <state relative-caret-position="291">
+              <caret line="114" column="94" selection-start-line="114" selection-start-column="94" selection-end-line="114" selection-end-column="94" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -92,6 +104,9 @@
       <find>mainMenu</find>
       <find>noteBook</find>
       <find>commandField</find>
+      <find>quic</find>
+      <find>end - start</find>
+      <find>startpro</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -102,8 +117,8 @@
       <list>
         <option value="$PROJECT_DIR$/lib/filemgr.py" />
         <option value="$PROJECT_DIR$/lib/threadmgr.py" />
-        <option value="$PROJECT_DIR$/lib/pyinsGUI.py" />
         <option value="$PROJECT_DIR$/pydev.py" />
+        <option value="$PROJECT_DIR$/lib/pyinsGUI.py" />
       </list>
     </option>
   </component>
@@ -258,22 +273,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/pyinsGUI.py">
+    <entry file="file://$PROJECT_DIR$/pydev.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
+        <state relative-caret-position="287">
+          <caret line="105" column="22" selection-start-line="105" selection-start-column="22" selection-end-line="105" selection-end-column="22" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pydev.py">
+    <entry file="file://$PROJECT_DIR$/lib/pyinsGUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="105" column="22" lean-forward="true" selection-start-line="105" selection-start-column="22" selection-end-line="105" selection-end-column="22" />
+        <state relative-caret-position="291">
+          <caret line="114" column="94" selection-start-line="114" selection-start-column="94" selection-end-line="114" selection-end-column="94" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
