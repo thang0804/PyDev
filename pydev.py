@@ -100,6 +100,11 @@ def createMain():
 
     gui.mainloop()
 
-luong1 = threading.Thread(target=createMain, args=())
-luong1.start()
+if __name__ == '__main__':
+    try:
+        luong1 = threading.Thread(target=createMain, args=())
+        luong1.start()
+        luong1.join()
+    except:
+        exit()
 ###

@@ -75,10 +75,18 @@ def createGUI(master=None):
     lb1 = Label(exewin, text='Command:')
     lb1.config(font=('Segoe UI', '11'))
     lb1.place(x=2, y=50)
-    commandField = Entry(exewin, width=85, state="readonly")
-    commandField.config(font=('Consolas', '10'))
-    commandField.place(x=5, y=79)
-    btnBrowse = Button(exewin, text='Browse..', height=1, width=10, command=lambda: browse(exewin, scriptEntry, commandField))
+
+    pyinstallerEntry = Entry(exewin, width=12)
+    pyinstallerEntry.config(font=('Consolas', '10'))
+    pyinstallerEntry.place(x=5, y=79)
+    pyinstallerEntry.insert(0, 'pyinstaller')
+    pyinstallerEntry.config(state='readonly')
+
+    argField = Entry(exewin, width=50)
+    argField.config(font=('Consolas', '10'))
+    argField.place(x=95, y=79)
+
+    btnBrowse = Button(exewin, text='Browse..', height=1, width=10, command=lambda: browse(exewin, scriptEntry, argField))
     btnBrowse.place(x=610, y=27)
     '''
     lb1 = Label(exewin, text='Output:')
