@@ -76,6 +76,8 @@ def createMain():
     toolMenu.add_command(label='Open Terminal', command=threadmgr.openterm, accelerator = 'Ctrl+Alt+T')
     toolMenu.add_separator()
     toolMenu.add_command(label='PyInstaller GUI', accelerator='Ctrl+Alt+P', command=lambda: pyinsGUI.createGUI(gui))
+    toolMenu.add_separator()
+    toolMenu.add_command(label='Settings & Preference', accelerator='Ctrl+F6')
 
     QuestionsMenu = Menu(menu)
     menu.add_cascade(label = 'Questions', menu = QuestionsMenu)
