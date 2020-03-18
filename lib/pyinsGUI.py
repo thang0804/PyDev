@@ -57,17 +57,21 @@ def startProcess(master, args):
     except:
         return None
 
+def showPyArg(master):
+    os.system('cls')
+    os.system('pyinstaller -h')
+    os.system('pause')
+
 def createGUI(master=None):
     exewin = Toplevel(master)
     exewin.title('PyInstaller GUI Tools')
-    exewin.geometry('700x300')
-    exewin.maxsize(width=700, height=300)
+    exewin.geometry('700x200')
+    exewin.maxsize(width=700, height=200)
     exewin.resizable(0,0)
 
-    menuButton = Menubutton(exewin, text='Choose Mode')
-    menuButton.place()
-    menuButton.menu = Menu(menuButton)
-    menuButton["menu"] = menuButton.menu
+    menu = Menu(exewin)
+    exewin.config(menu = menu)
+    menu.add_command(label = 'PyInstaller Arguments', command = lambda: showPyArg(exewin))
 
     lb0 = Label(exewin, text='Choose script to build Exe:')
     lb0.config(font=('Segoe UI', '11'))
@@ -110,10 +114,15 @@ def createGUI(master=None):
     btnOK = Button(exewin, text='OK', height=1, width=10, command=lambda: process(master, scriptEntry, processText))
     btnOK.place(x=527, y=460)
     '''
+    lbProTip1 = Label(exewin, text='Tip: Sử dụng args của PyInstaller bằng cách điền vào khoảng trắng trên command.\nĐể biết thêm thông tin về các arguments [Nhấn] \"PyInstaller Arguments\" ở trên.')
+    lbProTip1.config(font=('Consolas', '10'), fg='red')
+    lbProTip1.place(x=5, y=105)
+
     btnCancel = Button(exewin, text='Cancel', height=1, width=10, command=exewin.destroy)
-    btnCancel.place(x=610, y=150)
+    btnCancel.place(x=610, y=160)
+
     btnOK = Button(exewin, text='OK', height=1, width=10, command=lambda : startProcess(exewin, argField))
-    btnOK.place(x=527, y=150)
+    btnOK.place(x=527, y=160)
 
 def quickBuild(master, filepath, args):
     if filepath == '' or filepath == 'Untitled':
