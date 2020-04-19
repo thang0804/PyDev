@@ -1,4 +1,4 @@
-# PyDev++ Project
+# PyDev++ Project (Discontinued)
 + Cho phép chạy đa luồng của pip và PyInstaller
 + Gỡ bỏ Quick Menu
 + Sửa các Bugs
